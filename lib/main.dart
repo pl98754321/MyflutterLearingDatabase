@@ -39,7 +39,8 @@ class _MyHomepageState extends State<MyHomepage> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<TransecPro>(context, listen: false).saveDataToList();
+    TransecPro provider = Provider.of<TransecPro>(context, listen: false);
+    provider.saveDataToList();
   }
 
   @override
@@ -94,7 +95,12 @@ class _BodywidState extends State<Bodywid> {
                 return ListTile(
                   title: Text(eachpod.title),
                   subtitle: Text(eachpod.subtitle),
-                  onLongPress: () {},
+                  onLongPress: () {
+                    TransecPro provider =
+                        Provider.of<TransecPro>(context, listen: false);
+                    print("delete id = " + eachpod.id.toString());
+                    provider.deletedatadb(eachpod.id);
+                  },
                 );
               },
             ),

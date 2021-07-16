@@ -38,6 +38,7 @@ class _FormpagebodyState extends State<Formpagebody> {
             children: [
               Text("Form"),
               TextFormField(
+                autofocus: true,
                 controller: controllerA,
                 validator: (String? str) {
                   if (str == "") {

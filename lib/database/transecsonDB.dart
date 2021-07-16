@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/provider.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -37,11 +38,18 @@ class transectionDB {
     var snapshot = await store.find(db);
     List<pod> listpoddb = [];
     for (var data in snapshot) {
-      listpoddb.add(pod(
-        data["title"].toString(),
-        data["subtitle"].toString(),
-      ));
+      listpoddb.add(pod(data["title"].toString(), data["subtitle"].toString(),
+          id: data.key));
     }
     return listpoddb;
+  }
+
+  deletedata(int id) async {
+    Database db = await this.openDB();
+    var store = intMapStoreFactory.store("transection");
+    final finder = Finder(filter: Filter.byKey(id));
+    store.delete(db, finder: finder);
+    //check database
+    var snapshot = await store.find(db);
   }
 }

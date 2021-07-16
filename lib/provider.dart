@@ -22,12 +22,13 @@ class TransecPro with ChangeNotifier {
 
   Future saveDataToList() async {
     transectionDB transectiondb = transectionDB("test");
-
     listpod = await transectiondb.loaddata();
-    for (pod i in listpod) {
-      print(i.title + i.subtitle);
-    }
-    print(listpod.length);
     notifyListeners();
+  }
+
+  deletedatadb(int id) async {
+    transectionDB transectiondb = transectionDB("test");
+    await transectiondb.deletedata(id);
+    saveDataToList();
   }
 }
